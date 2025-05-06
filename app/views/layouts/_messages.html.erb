@@ -12,7 +12,7 @@
     <% end %>
 <% end %>
 
-<% if resource && resource.errors.any? %>
+<% if defined?(resource) && resource.errors.any? %>
     <div class="alert alert-danger">
         <h4 class="alert-heading"> 
         <%= pluralize(resource.errors.count, "error") %> prohibited this user from being saved:

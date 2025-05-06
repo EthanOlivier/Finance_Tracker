@@ -13,11 +13,6 @@ class FinnhubService
   end
 
   def company_profile(symbol)
-    self.class.get("/company/profile2", query: { symbol: symbol, token: @api_key })
-  end
-
-  def company_news(symbol, from, to)
-    # Call the API for company news
-    self.class.get("/company-news", query: { symbol: symbol, from: from, to: to, token: @api_key })
+    self.class.get("/stock/profile2", query: { symbol: symbol, token: @api_key })
   end
 end

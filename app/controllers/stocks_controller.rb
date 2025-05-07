@@ -1,7 +1,7 @@
 class StocksController < ApplicationController
   def show
-    if params[:symbol].present?
-      @symbol = params[:symbol].upcase
+    if params[:stock].present?
+      @symbol = params[:stock].upcase
       service = FinnhubService.new
       @quote = service.quote(@symbol)
       @profile = service.company_profile(@symbol)

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "portfolio", to: "users#portfolio"
+  post "portfolio", to: "users#portfolio"
   devise_for :users
   get "up" => "rails/health#show", as: :rails_health_check
   root "pages#home"

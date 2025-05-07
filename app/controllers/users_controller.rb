@@ -9,6 +9,8 @@ class UsersController < ApplicationController
       quote = service.quote(symbol)
 
       @stock = Stock.new(ticker: symbol, name: profile["name"], price: quote["c"])
+
+      render turbo_stream: turbo_stream.replace("results_turbo_stream", partial: "users/result")
     end
   end
 end

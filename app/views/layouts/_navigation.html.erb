@@ -1,15 +1,23 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <% if user_signed_in? %>
+      <%= link_to "Home", root_path, class: "navbar-brand" %>
+    <% else %>
+      <%= link_to "Log in", new_user_session_path, class: "navbar-brand btn btn-success text-white" %>
+    <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <% portfolio_link_style = (request.path == portfolio_path) ? "nav-link active" : "nav-link" %>
+            <%= link_to "Portfolio", portfolio_path, class: portfolio_link_style %>
+          </li>
+<%
+=begin%>
+ <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item dropdown">
@@ -22,15 +30,22 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        </li> 
+<%
+=end%>
+          <li class="nav-item">
+            <%= link_to "Log Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link active btn btn-outline-danger text-white" %>
+          </li>
+        <% end %>
       </ul>
-      <form class="d-flex" role="search">
+<%
+=begin%>
+ <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> 
+<%
+=end%>
     </div>
   </div>
 </nav>

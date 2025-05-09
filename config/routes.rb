@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :user_stocks
+  resources :user_stocks, only: [ :create ]
   get "up" => "rails/health#show", as: :rails_health_check
   get "portfolio", to: "users#portfolio"
   root "pages#home"

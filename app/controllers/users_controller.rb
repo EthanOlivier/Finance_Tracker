@@ -5,11 +5,7 @@ class UsersController < ApplicationController
 
     if params[:stock].present?
       symbol = params[:stock].upcase
-      service = FinnhubService.new
-      profile = service.company_profile(symbol)
-      quote = service.quote(symbol)
-
-      @stock = Stock.new(ticker: symbol, name: profile["name"], price: quote["c"])
+      @stock = Stock.lookup(symbol)
 
       render turbo_stream: turbo_stream.replace("results_turbo_stream", partial: "users/result")
     end

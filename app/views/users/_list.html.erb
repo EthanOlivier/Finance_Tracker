@@ -13,7 +13,7 @@
                     <tr>
                         <td><%= stock.ticker %></td>
                         <td><%= stock.name %></td>
-                        <td><%= stock.price %></td>
+                        <td><%= number_to_currency(stock.price) %></td>
                     </tr>
                 <% end %>
             </tbody>

@@ -17,4 +17,9 @@ class User < ApplicationRecord
   def can_add_stock?(ticker)
     under_stock_limit? && !has_stock?(ticker)
   end
+
+  def full_name
+    return "#{first_name} #{last_name}" if first_name || last_name
+    "Anonymous"
+  end
 end

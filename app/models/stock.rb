@@ -10,4 +10,10 @@ class Stock < ApplicationRecord
     quote = service.quote(symbol)
     Stock.new(ticker: symbol, name: profile["name"], price: quote["c"])
   end
+
+  def self.update_price(stock)
+    service = FinnhubService.new
+    quote = service.quote(stock.ticker)
+    quote["c"]
+  end
 end

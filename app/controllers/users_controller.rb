@@ -3,6 +3,12 @@ class UsersController < ApplicationController
   def portfolio
     @user = current_user
 
+    if @user.stocks.any?
+      @user.stocks.each do |stock|
+        stock.price = Stock.update_price(stock)
+      end
+    end
+
     if params[:stock].present?
       symbol = params[:stock].upcase
       @stock = Stock.lookup(symbol)

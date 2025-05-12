@@ -15,7 +15,10 @@
                         <td><%= stock.ticker %></td>
                         <td><%= stock.name %></td>
                         <td><%= number_to_currency(stock.price) %></td>
-                        <td><%= link_to "Remove", user_stock_path(stock.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{stock.ticker} from your portfolio?" }, class: "btn btn-info remove-stock-button" %></td>
+                        <td><%= link_to "Remove", user_stock_path(stock.id), 
+                                data: { turbo_method: :delete, 
+                                turbo_confirm: "Are you sure you want to remove #{stock.ticker} from your portfolio?" }, 
+                                class: "btn btn-info remove-stock-button" %></td>
                     </tr>
                 <% end %>
             </tbody>

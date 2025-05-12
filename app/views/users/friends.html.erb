@@ -1,0 +1,7 @@
+<h1><%= @user.full_name %>'s Friends</h1>
+
+<% if @user.friends.any? %>
+    <%= render "friends/list" %>
+<% else %>
+    <h3 class="mt-5">None :(</h1>
+<% end %>

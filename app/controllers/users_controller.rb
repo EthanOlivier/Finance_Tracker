@@ -19,6 +19,14 @@ class UsersController < ApplicationController
 
   def friends
     @user = current_user
+
+    if params[:friend].present?
+      symbol = params[:friend].downcase
+      @friend = User.find_by(email: symbol)
+      @symbol = symbol unless @friend
+
+      render turbo_stream: turbo_stream.replace("results_turbo_stream", partial: "users/friend_result")
+    end
   end
 
   def remove_friend

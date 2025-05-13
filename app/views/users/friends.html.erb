@@ -1,5 +1,19 @@
 <h1><%= @user.full_name %>'s Friends</h1>
 
+<div class="search-bar">
+    <h3>Search Friends</h3>
+    <%= form_with url: friends_path, method: :post, data: { turbo: true } do %>
+        <div class="col-8">
+            <%= text_field_tag :friend, nil, placeholder: "Email Address", autofocus: true, class: "form-control" %>
+        </div>
+        <div class="col-3 mt-3">
+            <%= button_tag "Search", class: "btn btn-success" %>
+        </div>
+    <% end %>
+</div>
+
+<%= render "users/friend_result" %>
+
 <% if @user.friends.any? %>
     <%= render "friends/list" %>
 <% else %>

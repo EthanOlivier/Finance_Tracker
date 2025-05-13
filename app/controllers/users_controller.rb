@@ -22,11 +22,18 @@ class UsersController < ApplicationController
 
     if params[:friend].present?
       symbol = params[:friend].downcase
-      @friend = User.find_by(email: symbol)
-      @symbol = symbol unless @friend
+      @friends = User.lookup(symbol)
+      @friends.delete_if { |friend| friend.id == @user.id }
+      @symbol = symbol if @friends.to_a.empty?
 
       render turbo_stream: turbo_stream.replace("results_turbo_stream", partial: "users/friend_result")
     end
+  end
+
+  def create_friend
+    Friendship.create(user_id: params[:id], friend_id: params[:friend_id])
+    flash[:notice] = "Successfully followed friend"
+    redirect_to friends_path
   end
 
   def remove_friend

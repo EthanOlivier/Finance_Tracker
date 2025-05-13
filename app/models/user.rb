@@ -21,7 +21,32 @@ class User < ApplicationRecord
   end
 
   def full_name
-    return "#{first_name} #{last_name}" unless first_name.length == 0 && last_name.length == 0
+    return "#{first_name} #{last_name}" unless first_name.to_s.empty? && last_name.to_s.empty?
     "Anonymous"
+  end
+
+  def self.lookup(param)
+    param.strip!
+    (first_name_lookup(param) + last_name_lookup(param) + email_lookup(param)).uniq
+  end
+
+  def friends?(id)
+    self.friends.where(id: id).exists?
+  end
+
+  class << self
+    private
+
+    def first_name_lookup(param)
+      where("first_name like ?", "%#{param}%")
+    end
+
+    def last_name_lookup(param)
+      where("last_name like ?", "%#{param}%")
+    end
+
+    def email_lookup(param)
+      where("email like ?", "%#{param}%")
+    end
   end
 end

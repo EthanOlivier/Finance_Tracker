@@ -15,10 +15,13 @@
                         <td><%= friend.email %></td>
                         <td><%= friend.first_name %></td>
                         <td><%= friend.last_name %></td>
-                        <td><%= link_to "Stop Following", remove_friend_path(@user.id, friend.id), 
+                        <td>
+                            <%= link_to "View Profile", user_path(friend), class: "btn btn-secondary btn-success inline-button" %>
+                            <%= link_to "Stop Following", remove_friend_path(@user.id, friend.id), 
                                 data: { turbo_method: :delete, 
                                 turbo_confirm: "Are you sure you want to remove #{friend.full_name} from your friends?" }, 
-                                class: "btn btn-danger remove-stock-button" %></td>
+                                class: "btn btn-danger inline-button" %>
+                        </td>
                     </tr>
                 <% end %>
             </tbody>

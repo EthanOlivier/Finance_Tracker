@@ -17,10 +17,10 @@
                                 <%= link_to "Add to Portfolio", user_stocks_path(user: current_user, ticker: @stock.ticker), data: { turbo_method: :post }, class: "btn btn-info" %>
                             <% else %>
                                 <% if current_user.has_stock?(@stock.ticker) %>
-                                    <h4><span class="badge text-bg-secondary">Stock already in portfolio</span></h4>
+                                    <h4><span class="badge text-bg-secondary">Stock already in your portfolio</span></h4>
                                 <% else %>
                                     <% if !current_user.under_stock_limit? %>
-                                        <h4><span class="badge text-bg-secondary">5 Stocks already in portfolio</span></h4>
+                                        <h4><span class="badge text-bg-secondary">5 Stocks already in your portfolio</span></h4>
                                     <% end %>
                                 <% end %>
                             <% end %>

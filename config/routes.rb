@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   post "friends", to: "users#friends"
   post "/users/:id/create_friend/:friend_id", to: "users#create_friend", as: "create_friend"
   delete "/users/:id/remove_friend/:friend_id", to: "users#remove_friend", as: "remove_friend"
-  resources :user_stocks, only: [ :create, :destroy ]
   devise_for :users, controllers: {
     sessions: "users/sessions"
   }
+  resources :users, only: [ :show ]
+  resources :user_stocks, only: [ :create, :destroy ]
 end

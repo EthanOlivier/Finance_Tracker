@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  def show
+    @user = User.find(params[:id])
+    @stocks = @user.stocks
+  end
+
   def portfolio
     @user = current_user
 
@@ -26,7 +31,7 @@ class UsersController < ApplicationController
       @friends.delete_if { |friend| friend.id == @user.id }
       @symbol = symbol if @friends.to_a.empty?
 
-      render turbo_stream: turbo_stream.replace("results_turbo_stream", partial: "users/friend_result")
+      render turbo_stream: turbo_stream.replace("results_turbo_stream", partial: "friends/result")
     end
   end
 

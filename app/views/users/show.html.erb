@@ -1,0 +1,32 @@
+<h1><%= @user.full_name %>'s Profile</h1>
+
+<div class="mt-3">
+    <div class="row">
+        <div class="col-8">
+            <div class="card mb-1 p-1">
+                <div class="card-body">
+                    <table class="col-12">
+                        <tr>
+                            <td><span><strong>Email: </strong><%= @user.email %></span></td>
+                            <td><span><strong>Name: </strong><%= @user.full_name %></span></td>
+                            <td>
+                                <% if current_user.friends?(@user.id) %>
+                                    <h6><span class="badge text-bg-secondary mt-1">Already following</span></h6>
+                                <% else %>
+                                    <%= link_to "Follow", 
+                                        create_friend_path(id: current_user.id, friend_id: @user.id), 
+                                        data: { turbo_method: :post }, 
+                                        class: "btn btn-info" %>
+                                <% end %>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if @user.stocks.any? %>
+    <%= render "users/list" %>
+<% end %>
